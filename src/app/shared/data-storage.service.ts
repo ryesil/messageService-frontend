@@ -11,7 +11,7 @@ export class DataStorageService {
   constructor(private httpClient: HttpClient) { }
 
   saveMessage(message:Message){
-    this.httpClient.post(ApiUrls.BASE_API+'/message',message).subscribe(response=>{
+    this.httpClient.post(ApiUrls.BASE_API+'/new',message).subscribe(response=>{
       console.log(response);
     })
   }
