@@ -1,0 +1,32 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="form-group col-8">
+          <label for="subject">Subject</label>
+          <input ngModel type="text" name="subject" class="form-control" id="subject" aria-describedby="subject" maxlength="50" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="mBody">Message Body</label>
+            <textarea ngModel name="mBody" class="form-control" id="mBody" rows="3" maxlength="200" required></textarea>
+          </div>
+          <br>
+          <div class="form-group col-8">
+            <label for="email">Email address</label>
+            <input ngModel name="email" required type="email" email class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group col-10">
+            <label for="phone">Phone Number</label>
+            <input ngModel name="phone" required type="number" class="form-control" id="phone" aria-describedby="phone" onKeyPress="if(this.value.length==10) return false;" min="0">
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-danger" (click)="onCancel(f)">Cancel</button>
+            </div>
+          </div>
+      </form>
+</div>

@@ -1,0 +1,24 @@
+<div class="container" style="float: left;">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Message</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let message of messageList; index as i" style="cursor: pointer;" (click)="rowClicked(i)">
+            <th scope="row">{{i+1}}</th>
+            <td>{{message.subject}}</td>
+            <td>{{message.messageBody}}</td>
+            <td>{{message.email}}</td>
+            <td>{{message.phone}}</td>
+            <td>{{message.date}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
