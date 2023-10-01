@@ -22,7 +22,7 @@ export class MessageListComponent implements OnInit {
   
 
 
-  public ngOnInit(): void {
+  public ngOnInit(): void {    
     this.subscription = this.dataStorageService.getMessages().subscribe({
       next:(messages: Message[])=>{
         messages.forEach(message => {
@@ -43,6 +43,30 @@ export class MessageListComponent implements OnInit {
    const id = this.messageList[i].id;   
   this.router.navigate([id, {edit:false}], {relativeTo:this.route})
   }
+
+addTwoNumbers(l1:number[],l2:number[]){
+  const num1 = Number(l1.reverse().join(''));
+  const num2 = Number(l2.reverse().join(''));
+  const num3 = num1+num2;
+  return String(num3).split('').map(el=>Number(el)).reverse();
+}
+
+addTwoNumbers2(l1:number[],l2:number[]){
+  let num1 = "";
+  let num2 = "";
+
+  for(let i = l1.length - 1 ; i >= 0; i--){
+    num1 += l1[i];
+  };
+
+  for(let i = l2.length - 1 ; i >= 0; i--){
+    num2 += l2[i];
+  };
+const num3 = parseInt(num1) + parseInt(num2);
+return String(num3).split("").map(str=>Number(str));
+
+
+}
 
 
 }
