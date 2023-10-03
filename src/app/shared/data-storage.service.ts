@@ -24,7 +24,10 @@ export class DataStorageService {
   getAMessage(id:number){
     return this.httpClient.get<Message>(ApiUrls.BASE_API+'/messages/'+id);
   }
+  updateMessage(id:number, message:Message):any{
+   return this.httpClient.put(ApiUrls.BASE_API+"/messages/"+id, message);
 
+  }
 
 
 }

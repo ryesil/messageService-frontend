@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataStorageService } from '../shared/data-storage.service';
+import { Message } from '../shared/message.model';
+import { NgForm } from '@angular/forms';
+import { TimestamService } from '../shared/timestam.service';
 
 @Component({
   selector: 'app-message-detail',
@@ -9,21 +12,19 @@ import { DataStorageService } from '../shared/data-storage.service';
 })
 export class MessageDetailComponent implements OnInit{
   pathParamId!: number;
+  message!: Message;
 
-
-constructor(private route: ActivatedRoute, private dataStorageService: DataStorageService){
+constructor(private route: ActivatedRoute, private dataStorageService: DataStorageService, private timestamp: TimestamService,){
 
 }
   ngOnInit(): void {
-    this.fibonacciNumbers(4);
-    this.reverseString("ramazan");
-    this.swapTwoNumbers(2,3);
+
 this.route.params.subscribe(params=>{
       this.pathParamId = params['id'];
     })
 
     this.dataStorageService.getAMessage(this.pathParamId).subscribe(message=>{
-      console.log(message);
+      this.message = message;
     })
 
   }
@@ -32,38 +33,24 @@ this.route.params.subscribe(params=>{
       
   }
 
-  onSubmit(f:any){
+  onSubmit(f:NgForm){
+    if(f.valid){
+      const subject = f.value.subject;
+      const body = f.value.mBody;
+      const email = f.value.email;
+      const phone = String(f.value.phone);
+      const timestamp = this.timestamp.timetamp;
+      const messageId = f.value.messageId ? f.value.messageId : 0;
+      console.log(f.value);
+      const message: Message = new Message(messageId, subject,body,email,phone, timestamp);
+      const id = this.pathParamId;
+      this.dataStorageService.updateMessage(id, message).subscribe((response: any) =>{
+        console.log(response);
+      })
 
-  }
+    }
+      }
 
-reverseString(str:string){
-  const strArr = str.split("");
-  let str2 = "";
-  for(let i = strArr.length - 1 ; i>=0;i--){
-    str2+=strArr[i];
-  }
-  console.log(str2);
-}
 
-reverseString2(str:string){
-  return str.split("").reverse().join("");
-}
 
-swapTwoNumbers(n1:number, n2:number){
-let n3 = 0;
-n3 = n1;
-n1 = n2;
-n2 = n3;
-
-console.log(n1,n2);
-}
-
-fibonacciNumbers(num: number){
-  let container = [2,3];
-  
-  for(let i = 0 ; i < num -2; i++){
-      container.push(container[i] + container[i+1]);
-  }
-  console.log(container);
-}
 }
