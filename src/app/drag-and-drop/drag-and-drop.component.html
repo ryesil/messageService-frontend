@@ -1,0 +1,46 @@
+<div class="container text-center" *ngIf="!test">
+    <h3>Do you want to test your knowledge on Spring Boot?</h3>
+    <div class="row justify-content-center">
+        <div class="col-1"><button class="btn btn-primary" type="button" (click)="onYes()">Yes</button></div>
+        <div class="col-1 "><button class="btn btn-danger" type="button" (click)="onNo()">No</button></div>
+    </div>
+</div>
+
+<div class="container" *ngIf="test">
+    <div class="row" style="margin-top:50px ;">
+        <div class="col-5 mx-auto">
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-5">
+            <h3>Questions</h3>
+            <ul 
+            id="list1" 
+            cdkDropList 
+            [cdkDropListConnectedTo]="['list2']" 
+            class="list-group"
+            (cdkDropListDropped)="drop($event)" 
+            [cdkDropListData]="listOfQuestions">
+            <li [cdkDragDisabled]="question === 'And Of Questions'" cdkDrag class="list-group-item text-center" *ngFor="let question of listOfQuestions">{{question}}</li>
+            </ul>
+        </div>
+
+        <div class="col-2"></div>
+
+        <div class="col-5">
+            <h3>Answers</h3>
+            <ul 
+            id="list2" 
+            cdkDropList 
+            [cdkDropListConnectedTo]="['list1']" 
+            class="list-group"
+            [cdkDropListData]="listOfAnswers" 
+            (cdkDropListDropped)="drop($event)">
+            <li cdkDrag class="list-group-item text-center" *ngFor="let answer of listOfAnswers">{{answer}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -15,13 +15,16 @@ import { FormsModule } from '@angular/forms';
 import { DataStorageService } from './shared/data-storage.service';
 import { TimestamService } from './shared/timestam.service';
 import { MessageDetailComponent } from './message-list/message-detail.component';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
   {path:'home', component:HomeComponent},
   {path:'messages',component:MessageListComponent},
   {path:'messages/:id', component: MessageDetailComponent},
-  {path:'new', component:NewMessageComponent}
+  {path:'new', component:NewMessageComponent},
+  {path:'drag-drop', component:DragAndDropComponent}
 ]
 
 
@@ -33,6 +36,7 @@ const routes: Routes = [
     HomeComponent,
     NewMessageComponent,
     MessageDetailComponent,
+    DragAndDropComponent,
    
   ],
   imports: [
@@ -43,7 +47,8 @@ const routes: Routes = [
     DropDownsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [DataStorageService, TimestamService],
   exports:[RouterModule],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataStorageService } from '../shared/data-storage.service';
 import { Message } from '../shared/message.model';
 import { NgForm } from '@angular/forms';
@@ -14,7 +14,7 @@ export class MessageDetailComponent implements OnInit{
   pathParamId!: number;
   message!: Message;
 
-constructor(private route: ActivatedRoute, private dataStorageService: DataStorageService, private timestamp: TimestamService,){
+constructor(private route: ActivatedRoute, private dataStorageService: DataStorageService, private timestamp: TimestamService, private router: Router){
 
 }
   ngOnInit(): void {
@@ -30,7 +30,9 @@ this.route.params.subscribe(params=>{
   }
 
   onCancel(f:any){
-      
+      if(!f.dirty){
+        this.router.navigate(["../"], {relativeTo:this.route})
+      }
   }
 
   onSubmit(f:NgForm){
